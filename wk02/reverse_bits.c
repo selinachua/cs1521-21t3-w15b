@@ -12,8 +12,9 @@ typedef unsigned int Word;
  * 2. check if each bit is 1 or 0
  * 3. if it is 1, set the bit in return value
  * 
- * step by step:
+ * step by step
  * extract the rightmost bit:
+ * out = 0000
  * 1010
  * 0001 &
  * -------
@@ -62,7 +63,27 @@ typedef unsigned int Word;
  * 
  */
 Word reverseBits(Word w) {
-    return 0;
+    Word out;
+
+    for (int i = 0; i < 32; i++) {
+        // extract the bit.
+        // first iteration ->  0000 ... 0001 
+        // second iteration -> 0000 ... 0010
+        // third iteration  -> 0000 ... 0100
+        int ext_mask = 1 << i;
+        int result = w & ext_mask;
+        if (result != 0) {
+            // set the bit.
+            // 0001 -> 1 << 4 -> 0000
+            // first iteration  -> 1000 ... 0000 -> 1 << (31 - 0)
+            // second iteration -> 0100 ... 0000 -> 1 << (31 - 1)
+            // third iteration  -> 0010 ... 0000 -> 1 << (31 - 2)
+            int set_mask = 1 << (32 - 1 - i);
+            out = out | set_mask;
+        }
+    }
+
+    return out;
 }
 
 // testing
@@ -79,3 +100,4 @@ int main(void) {
     assert(reverseBits(w1) == 0xE6A2C480);
     puts("All tests passed!");
     return 0;
+}

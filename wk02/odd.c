@@ -22,12 +22,19 @@ int main(void) {
 
 /**
  * Function that checks if an int is odd or even using bit masking.
- *
- * 0111 1010 -> even
- * 0111 1011 -> odd
+ * 
+ * 0101 1010 -> even
+ * 0101 1011 -> odd
  */
 int is_odd(int num) {
-    // TODO: Fill in this function.
-    
-    return 0;
+    // extract the last bit
+    // 1. create the mask 
+    int mask = 1; // 0000 ... 0001
+    // 2. value & mask
+    int result = num & mask;
+
+    if (result == 0) {
+        return 0;
+    }
+    return 1;
 }

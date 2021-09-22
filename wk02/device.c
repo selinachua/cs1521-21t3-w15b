@@ -13,14 +13,23 @@
  * We have this device and we want to change the settings of the device
  * using bitwise operations.
  */
-unsigned char device;
+unsigned char device; //0000 0000
 
 // mark the device as locked for reading bytes
-
+// 0001 0000
+// 0000 0001
+// 0000 0100
+// ----------
+// 0001 0101
+device = LOCKED | READING | AS_BYTES;
 // mark the device as locked for writing blocks
-
+device = LOCKED | WRITING | AS_BLOCKS;
 // set the device as locked, leaving other flags unchanged
-
+// 0001 0001 -> device
+// 0001 0000 -> LOCKED
+// ----------
+// 0001 0001
+device = device | LOCKED;
 // remove the lock on a device, leaving other flags unchanged
 
 // swap a device between reading and writing, leaving other flags unchanged
