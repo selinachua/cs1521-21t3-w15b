@@ -2,24 +2,35 @@ IEEE Floating Point Representation
 float f  = 1.0; // single precision -> 32 bits 
 double d = 2.0; // double precision -> 64 bits 
 
-?    | ?        | ?
+sign | exponent | fraction / mantissa
 0    | 01111111 | 10000000000000000000000
+1 | 8 | 23 = 32 bits
 
 FORMULA:
-???
+-1^sign * (1 + fraction) * 2^(exponent - bias)
+bias = 127
 
 ------------ IEEE -> float
 a) 0 01111111 10000000000000000000000
-sign     = ?
-exponent = ?
-fraction = ?
+sign     = 0
+exponent = 127
+fraction = 2^-1 = 1/2 = 0.5
+
+-1^sign * (1 + fraction) * 2^(exponent - 127)
+= -1^0 * (1 + 0.5) * 2^(127 - 127)
+= 1 * 1.5 * 2^0
+= 1 * 1.5 * 1 = 1.5
 
 
 b) 0 01111110 00000000000000000000000
-sign     = ?
-exponent = ?
-fraction = ?
+sign     = 0
+exponent = 126
+fraction = 0
 
+-1^sign * (1 + fraction) * 2^(exponent - 127)
+= -1^0 * (1 + 0) * 2^(126 - 127)
+= 1 * 1 * 2^(-1)
+= 1 * 1 * 0.5 = 0.5
 
 ------------ float -> IEEE binary 
 Hints:
@@ -35,14 +46,25 @@ STEPS:
 
 FORMULA:
 -1^sign * (1 + fraction) * 2^(exponent - 127)
+a * b * c
 
-a) 2.5 = ?
-sign     = ?
-exponent = ?
-fraction = ?
+a) 2.5 = 1 * 1.25 * 2^1
+       = -1^0 * (1 + 0.25) * 2^(128 - 127)
+sign     = 0    = 0
+exponent = 128  = 1000 0000
+fraction = 0.25 = 0100....
+
+IEEE = 0100000000100....
 
 
-b) 0.375 =
-sign     = ?
-fraction = ?
-exponent = ?
+a = 1 = -1^sign 
+sign = 0
+b = 1.5 = 1 + fraction
+
+b) 0.375 = 1 * 1.5 * 2^(-2)
+         = -1^0 * (1 + 0.5) * 2^(125 - 127)
+sign     = 0   = 0
+fraction = 0.5 = 10000.....
+exponent = 125 = 01111101
+
+IEEE = 00111110110000.....

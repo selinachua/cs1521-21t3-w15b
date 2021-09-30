@@ -25,9 +25,14 @@ int main(void) {
  * 
  * 0101 1010 -> even
  * 0101 1011 -> odd
+
+ * 0101 0101   -> value
+ * 0000 0001 & -> mask
+ -------------
+ * 0000 0001
  */
 int is_odd(int num) {
-    // extract the last bit
+    // extract the last bit 
     // 1. create the mask 
     int mask = 1; // 0000 ... 0001
     // 2. value & mask
