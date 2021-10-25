@@ -5,7 +5,7 @@ int main(void) {
     printf("Enter a number: ");
     scanf("%d", &x);
 
-    if (x > 46340) {
+    if (x > 46340) { // x <= 46340, goto else 
         printf("square too big for 32 bits\n");
     } else {
         y = x * x;

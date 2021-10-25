@@ -1,32 +1,79 @@
 ##### MIPS #####
+
+file.c -dcc-> ... -> file.s -> ... -> ./file
+
+
 ---- Registers
-$zero   -> 
-$v0, v1 -> 
-$a0-a3  -> 
-$t?     -> 
-$s?     -> 
-$ra     -> 
+- finite number of registers = 32
+$zero   -> to store the value 0.
+$v0, v1 -> syscalls, return values of functions 
+$a0-a3  -> arguments of functions & arguments of syscalls 
+$t?     -> temporary registers
+$s?     -> safe registers 
+$ra     -> return address
 
 ---- Instructions
 MATH INSTRUCTIONS 
+$t1 = $t0 + $t2
+add     $t1, $t0, $t2
 
-
-
-LOADING INSTRUCTIONS 
+LOADING INSTRUCTIONS -> loading a value into a register 
 put a value into a register 
+$t0 = 10
+$t0 = $a0
+$t0 = ...
 
-1. Loading an immediate value
+1. Loading an immediate value into a register 
+immediate value = constant
+-> 1,2,3,...
+-> 'a', 'b', '\n'
+NOT constants -> variables
+
+$t0 = 0
+li  $t0, 0
+
+$t1 = '\n'
+li  $t1, '\n'
 
 
 2. Loading from an address (data section)
+la, lw, lb
+
+la -> load an ADDRESS (an array is just an address to the first element)
+lw -> load a WORD (4 bytes) AT the address 
+lb -> load a BYTE (1 byte) AT the address 
+
+    .data 
+string:
+    .asciiz     "Enter a value:"
+num:
+    .word       10
+char:
+    .byte       'a'
+
+    .text
+la  $t0, string     # $t0 = 0xFFF123
+
+la  $t0, num        # $t0 = 0xFFF456
+lw  $t0, num        # $t0 = 10;
+
+lb  $t0, char       # $t0 = 'a';
 
 
-3. Loading from another register
+3. Loading from another register # x = y;
+$t1 = $t2
+move    $t1, $t2 
 
 
 
 ---- System Calls
 Steps:
-1. 
-2. 
-3. 
+1. Load the correct code into $v0
+2. Load the correct arguments into $a registers (if there are any)
+3. syscall
+
+printf("%d", 10);
+
+li  $v0, 1      # $v0 = 1
+li  $a0, 10     # $a0 = 10
+syscall
