@@ -1,3 +1,8 @@
+// [1, 5, 6, 3], length = 4
+// &a[0]
+// [5, 6, 3], length = 3
+// [6, 3], length = 2
+
 int max(int a[], int length) {
     int first_element = a[0];
     if (length == 1) {
