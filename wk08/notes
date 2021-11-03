@@ -8,3 +8,24 @@ FILES
     -> fgets, fputs 
     -> fprintf, fscanf 
 -> stdin, stdout, stderr 
+
+
+
+pos: 0
+lseek(fd, 0, SEEK_END);
+pos: 10,000
+
+lseek(fd, -1000, SEEK_CUR);
+pos: 9,000
+
+lseek(fd, 0, SEEK_SET);
+pos: 0
+
+lseek(fd, -100, SEEK_SET);
+pos: ??? 
+
+lseek(fd, 1000, SEEK_SET);
+pos: 1,000
+
+lseek(fd, 1000, SEEK_CUR);
+pos: 2,000
